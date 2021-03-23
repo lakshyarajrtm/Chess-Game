@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Component.h"
 
+
 class Game
 {
 
@@ -19,12 +20,9 @@ private:
 	bool running;
 	SDL_Window* window;
 
-	
-
-
 	// board
 	Board* board;
 
-	// characters
-
+	// character array 
+	Pawn* pieces[32];
 };
