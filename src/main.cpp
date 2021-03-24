@@ -8,7 +8,7 @@
 int main(int argc, char* args[])
 {
 	Game* game = new Game();
-	Uint32 FPS = 1000;
+	Uint32 FPS = 2000;
 
 	while (game->isRunning())
 	{
@@ -19,6 +19,7 @@ int main(int argc, char* args[])
 
 		auto end = std::chrono::system_clock::now();
 		auto duration = end - start;
+
 		Uint32 dur = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
 		
 		

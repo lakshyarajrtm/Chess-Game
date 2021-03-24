@@ -57,5 +57,6 @@ public:
 	pawnType type;
 	color col;
 
+	int xBlock, yBlock;
 	SDL_Rect src, dest;
 };

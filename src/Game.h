@@ -25,4 +25,5 @@ private:
 
 	// character array 
 	Pawn* pieces[32];
+
 };

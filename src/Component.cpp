@@ -46,7 +46,7 @@ Board::~Board()
 
 Pawn::Pawn(const char* image) :Component(image)
 {
-	src.h = 250;
+	src.h = 120;
 	src.w = 80;
 	dest.h = 60;
 	dest.w = 60;
@@ -56,69 +56,72 @@ Pawn::Pawn(const char* image) :Component(image)
 
 void Pawn::DrawTexture()
 {
+	int xoffset = 15;
+	int yoffset = 30;
+
 	switch (type)
 	{
 	case pawnType::PAWN:
 	{
-		src.x = 416;
+		src.x = 416+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 		break;
 	}
 	case pawnType::ROOK:
 	{
-		src.x = 333;
+		src.x = 333+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 		break;
 	}
 	case pawnType::KNIGHT:
 	{
-		src.x = 250;
+		src.x = 250+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 
 		break;
 	}
 	case pawnType::BISHOP:
 	{
-		src.x = 166;
+		src.x = 166+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 
 		break;
 	}
 	case pawnType::QUEEN:
 	{
-		src.x = 83;
+		src.x = 83+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 
 		break;
 	}
 	case pawnType::KING:
 	{
-		src.x = 0;
+		src.x = 0+xoffset;
 
 		if (col == color::BLACK)
 			src.y = 140;
 		else
-			src.y = 0;
+			src.y = yoffset;
 
 		break;
 	}

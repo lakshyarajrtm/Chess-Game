@@ -10,7 +10,6 @@ SDL_Renderer* renderer;
 
 pawnType layout[8][8] = {
 
-	
 				   { pawnType::ROOK, pawnType::KNIGHT, pawnType::BISHOP, pawnType::KING, pawnType::QUEEN, pawnType::BISHOP, pawnType::KNIGHT, pawnType::ROOK },
 				   { pawnType::PAWN, pawnType::PAWN, pawnType::PAWN, pawnType::PAWN, pawnType::PAWN, pawnType::PAWN, pawnType::PAWN, pawnType::PAWN },
 				   { pawnType::NIL, pawnType::NIL, pawnType::NIL, pawnType::NIL, pawnType::NIL, pawnType::NIL, pawnType::NIL, pawnType::NIL, },
@@ -55,6 +54,7 @@ Game::Game():running(false), window(nullptr), board(nullptr)
 			running = true;
 
 			// game objects creation
+
 			board = new Board("assets/images/chess-board.bmp");
 			for (int i = 0; i < PIECE_COUNT; i++)
 			{
@@ -66,15 +66,19 @@ Game::Game():running(false), window(nullptr), board(nullptr)
 			{
 				for (int j = 0; j < 8; j++)
 				{
-					pawnType num = layout[j][i];
+					pawnType num = layout[i][j];
+
 					if (num != pawnType::NIL)
 					{
-						(pieces[pieceIdx])->dest.x = i * 100;
-						(pieces[pieceIdx])->dest.y = j * 80;
+						(pieces[pieceIdx])->dest.x = (j * 100)+20;
+						(pieces[pieceIdx])->dest.y = (i * 80)+10;
+						(pieces[pieceIdx])->xBlock = j;
+						(pieces[pieceIdx])->yBlock = i;
+						
 						(pieces[pieceIdx])->type = num;
 						(pieces[pieceIdx])->col = color::BLACK;
 						
-						if (pieceIdx > 16)
+						if (pieceIdx > 15)
 						{
 							(pieces[pieceIdx])->col = color::WHITE;
 						}
