@@ -5,10 +5,6 @@
 #include <iostream>
 
 
-// enum for type of pieces
-
-
-
 
 class Component
 {
@@ -19,7 +15,7 @@ public:
 	SDL_Texture* tex = nullptr; 
 
 	Component();
-	Component(const char*);
+	explicit Component(const char*);
 	virtual ~Component();
 	
 
@@ -32,9 +28,16 @@ class Board : public Component
 {
 
 public:
+
+	// constructors
 	Board();
-	Board(const char*);
+	explicit Board(const char*);
+	Board(const Board&);
+	Board(Board&&);
+	Board& operator=(const Board&);
 	~Board();
+
+	// methods
 	void DrawTexture();
 
 	
@@ -48,11 +51,14 @@ class Pawn : public Component
 public:
 
 	Pawn();
-	Pawn(const char* );
+	explicit Pawn(const char* );
+	Pawn(const Pawn&);
+	Pawn(Pawn&&);
+	Pawn& operator=(Pawn&);
 	~Pawn();
 	void DrawTexture();
 	void update();
-	//void move(SDL_Event&);             to implement
+	//void move(SDL_Event& e);
 
 	pawnType type;
 	color col;

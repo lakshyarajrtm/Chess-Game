@@ -70,8 +70,8 @@ Game::Game():running(false), window(nullptr), board(nullptr)
 
 					if (num != pawnType::NIL)
 					{
-						(pieces[pieceIdx])->dest.x = (j * 100)+20;
-						(pieces[pieceIdx])->dest.y = (i * 80)+10;
+						(pieces[pieceIdx])->dest.x = (j * 100) + 20;
+						(pieces[pieceIdx])->dest.y = (i * 80) + 10;
 						(pieces[pieceIdx])->xBlock = j;
 						(pieces[pieceIdx])->yBlock = i;
 						
@@ -135,9 +135,11 @@ Game::~Game()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+
 	delete board;
 	window = nullptr;
 	renderer = nullptr;
 	board = nullptr;
 
 }
+

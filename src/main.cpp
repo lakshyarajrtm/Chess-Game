@@ -8,7 +8,7 @@
 int main(int argc, char* args[])
 {
 	Game* game = new Game();
-	Uint32 FPS = 2000;
+	Uint32 FPS = 200;
 
 	while (game->isRunning())
 	{

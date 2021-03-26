@@ -10,11 +10,9 @@ enum class pawnType
 
 enum class color
 {
-	BLACK = 0, WHITE = 1
+	NIL = 0, BLACK = 1, WHITE = 2
 };
 
 
-
 extern SDL_Renderer* renderer;
-
 extern pawnType layout[8][8];

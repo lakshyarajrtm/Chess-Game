@@ -1,8 +1,5 @@
 #include "Component.h"
-
 #include <fstream>
-
-
 
 
 Component::Component(const char* image)
@@ -11,8 +8,6 @@ Component::Component(const char* image)
 	tex = SDL_CreateTextureFromSurface(renderer, surf);
 	SDL_FreeSurface(surf);
 	surf = nullptr;
-	
-
 }
 
 Component::~Component()
@@ -23,9 +18,9 @@ Component::~Component()
 
 // implementation for board
 
-
-Board::Board(const char* img):Component(img)
+Board::Board(const char* img) : Component(img)
 {
+
 }
 
 void Board::DrawTexture() 
@@ -44,90 +39,90 @@ Board::~Board()
 
 // implementation for pawn
 
-Pawn::Pawn(const char* image) :Component(image)
+Pawn::Pawn(const char* image) : Component(image), xBlock(0), yBlock(0),
+								type(pawnType::NIL), col(color::NIL)
 {
 	src.h = 120;
 	src.w = 80;
 	dest.h = 60;
 	dest.w = 60;
-
-	
 }
 
 void Pawn::DrawTexture()
 {
-	int xoffset = 15;
+	int xoffset = 10;
 	int yoffset = 30;
 
 	switch (type)
 	{
-	case pawnType::PAWN:
-	{
-		src.x = 416+xoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
-		break;
-	}
-	case pawnType::ROOK:
-	{
-		src.x = 333+xoffset;
+		case pawnType::PAWN:
+		{
+			src.x = 416 + xoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
-		break;
-	}
-	case pawnType::KNIGHT:
-	{
-		src.x = 250+xoffset;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
+			break;
+		}
+		case pawnType::ROOK:
+		{
+			src.x = 333 + xoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
+			break;
+		}
+		case pawnType::KNIGHT:
+		{
+			src.x = 250 + xoffset;
 
-		break;
-	}
-	case pawnType::BISHOP:
-	{
-		src.x = 166+xoffset;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
+			break;
+		}
+		case pawnType::BISHOP:
+		{
+			src.x = 166 + xoffset;
 
-		break;
-	}
-	case pawnType::QUEEN:
-	{
-		src.x = 83+xoffset;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
+			break;
+		}
+		case pawnType::QUEEN:
+		{
+			src.x = 83 + xoffset;
 
-		break;
-	}
-	case pawnType::KING:
-	{
-		src.x = 0+xoffset;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
 
-		if (col == color::BLACK)
-			src.y = 140;
-		else
-			src.y = yoffset;
+			break;
+		}
+		case pawnType::KING:
+		{
+			src.x = 0 + xoffset;
 
-		break;
-	}
-	default:
-		return;
+			if (col == color::BLACK)
+				src.y = 140;
+			else
+				src.y = yoffset;
 
+			break;
+		}
+
+		default:
+			return;
 	}
 	
 	SDL_SetRenderTarget(renderer, tex);
@@ -141,11 +136,8 @@ void Pawn::DrawTexture()
 
 void Pawn::move(SDL_Event& e)
 {
-
 	case pawnType::BLACK_PAWN:
-
 }
-
 
 */
 
