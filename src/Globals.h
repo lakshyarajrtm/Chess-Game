@@ -8,7 +8,7 @@ enum class pawnType
 
 };
 
-enum class color
+enum color
 {
 	NIL = 0, BLACK = 1, WHITE = 2
 };

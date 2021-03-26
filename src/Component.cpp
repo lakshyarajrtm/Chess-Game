@@ -28,7 +28,7 @@ void Board::DrawTexture()
 	
 	SDL_SetRenderTarget(renderer, tex);
 	SDL_RenderCopy(renderer, tex, NULL, NULL);
-	SDL_RenderPresent(renderer);
+	
 }
 
 Board::~Board()
@@ -40,7 +40,7 @@ Board::~Board()
 // implementation for pawn
 
 Pawn::Pawn(const char* image) : Component(image), xBlock(0), yBlock(0),
-								type(pawnType::NIL), col(color::NIL)
+								type(pawnType::NIL), col(NIL)
 {
 	src.h = 120;
 	src.w = 80;
@@ -60,7 +60,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 416 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -70,7 +70,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 333 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -80,7 +80,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 250 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -91,7 +91,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 166 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -102,7 +102,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 83 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -113,7 +113,7 @@ void Pawn::DrawTexture()
 		{
 			src.x = 0 + xoffset;
 
-			if (col == color::BLACK)
+			if (col == BLACK)
 				src.y = 140;
 			else
 				src.y = yoffset;
@@ -127,7 +127,7 @@ void Pawn::DrawTexture()
 	
 	SDL_SetRenderTarget(renderer, tex);
 	SDL_RenderCopy(renderer, tex, &src, &dest);
-	SDL_RenderPresent(renderer);
+	
 }
 
 

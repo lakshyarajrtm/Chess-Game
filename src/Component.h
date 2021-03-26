@@ -10,14 +10,14 @@ class Component
 {
 
 public:
-
-	SDL_Surface* surf = nullptr;
-	SDL_Texture* tex = nullptr; 
-
+	// constructors
 	Component();
 	explicit Component(const char*);
 	virtual ~Component();
 	
+
+	SDL_Surface* surf = nullptr;
+	SDL_Texture* tex = nullptr;
 
 };
 
@@ -56,13 +56,19 @@ public:
 	Pawn(Pawn&&);
 	Pawn& operator=(Pawn&);
 	~Pawn();
+
+	// methods
 	void DrawTexture();
 	void update();
 	//void move(SDL_Event& e);
 
+	// stores piece type and color info
 	pawnType type;
 	color col;
 
+	// store the block postion of a piece
 	int xBlock, yBlock;
+
+	// stores the src and dest for textures
 	SDL_Rect src, dest;
 };

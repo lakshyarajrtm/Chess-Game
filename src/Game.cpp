@@ -21,7 +21,7 @@ pawnType layout[8][8] = {
 };
 
 
-Game::Game():running(false), window(nullptr), board(nullptr)
+Game::Game():running(false), window(nullptr), board(nullptr), turn(BLACK), ai_enabled(false)
 {
 	
 
@@ -76,11 +76,11 @@ Game::Game():running(false), window(nullptr), board(nullptr)
 						(pieces[pieceIdx])->yBlock = i;
 						
 						(pieces[pieceIdx])->type = num;
-						(pieces[pieceIdx])->col = color::BLACK;
+						(pieces[pieceIdx])->col = BLACK;
 						
 						if (pieceIdx > 15)
 						{
-							(pieces[pieceIdx])->col = color::WHITE;
+							(pieces[pieceIdx])->col = WHITE;
 						}
 						
 						pieceIdx++;
@@ -96,6 +96,7 @@ Game::Game():running(false), window(nullptr), board(nullptr)
 void Game::renderGame()
 {
 	SDL_RenderClear(renderer);
+	
 
 	board->DrawTexture();
 	
@@ -104,25 +105,37 @@ void Game::renderGame()
 		(pieces[i])->DrawTexture();
 	}
 	
-	
+	SDL_RenderPresent(renderer);
+
+
 }
 
 void Game::update()
 {
 	SDL_Event event;
+	int xMousePos{0}, yMousePos{0};
 
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{
 			case SDL_QUIT:
+			{
 				running = false;
 				break;
+			}
+
+			case SDL_MOUSEBUTTONDOWN:
+			{
+				SDL_GetMouseState(&xMousePos, &yMousePos);
+				break;
+			}
+
 		}
 	}
 
 	
-	
+
 }
 
 bool Game::isRunning()
@@ -135,8 +148,8 @@ Game::~Game()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-
 	delete board;
+
 	window = nullptr;
 	renderer = nullptr;
 	board = nullptr;
