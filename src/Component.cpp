@@ -12,8 +12,9 @@ Component::Component(const char* image)
 
 Component::~Component()
 {
-	delete tex;
+	SDL_FreeSurface(surf);
 	tex = nullptr;
+	
 }
 
 // implementation for board
@@ -144,6 +145,6 @@ void Pawn::move(SDL_Event& e)
 
 Pawn::~Pawn()
 {
-
+	
 }
 

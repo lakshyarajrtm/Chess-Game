@@ -5,6 +5,7 @@
 #include <ctime>
 
 
+
 int main(int argc, char* args[])
 {
 	Game* game = new Game();
@@ -12,12 +13,12 @@ int main(int argc, char* args[])
 
 	while (game->isRunning())
 	{
-		auto start = std::chrono::system_clock::now();
+		std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
 		game->update();
 		game->renderGame();
 
-		auto end = std::chrono::system_clock::now();
+		std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
 		auto duration = end - start;
 
 		Uint32 dur = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
@@ -30,6 +31,10 @@ int main(int argc, char* args[])
 
 	}
 
+	delete game;
+	
 	return 0;
 }
+
+
 

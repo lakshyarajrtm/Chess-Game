@@ -33,3 +33,4 @@ private:
 	// to see if opponent is computer
 	bool ai_enabled;
 };
+

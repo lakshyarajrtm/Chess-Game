@@ -148,11 +148,18 @@ Game::~Game()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+
 	delete board;
+
+	for (int i = 0; i < PIECE_COUNT; i++)
+	{
+		delete pieces[i];
+	}
 
 	window = nullptr;
 	renderer = nullptr;
 	board = nullptr;
+
 
 }
 

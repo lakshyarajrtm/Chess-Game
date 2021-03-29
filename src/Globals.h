@@ -16,3 +16,17 @@ enum color
 
 extern SDL_Renderer* renderer;
 extern pawnType layout[8][8];
+
+
+template <typename T> class IsChar
+{
+	enum {value = 0};
+};
+
+
+template <> class IsChar<char>
+{
+	enum { value = 1 };
+};
+
+IsChar<char> s;
