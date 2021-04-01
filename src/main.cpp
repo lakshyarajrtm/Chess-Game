@@ -8,6 +8,7 @@
 
 int main(int argc, char* args[])
 {
+	
 	Game* game = new Game();
 	Uint32 FPS = 200;
 

@@ -4,6 +4,8 @@
 #include "Globals.h"
 #include "Component.h"
 #define PIECE_COUNT (int)32
+#define PLAYER 0
+#define OPPONENT 1
 
 SDL_Renderer* renderer;
 
@@ -21,7 +23,7 @@ pawnType layout[8][8] = {
 };
 
 
-Game::Game():running(false), window(nullptr), board(nullptr), turn(BLACK), ai_enabled(false)
+Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 {
 	
 
@@ -51,8 +53,7 @@ Game::Game():running(false), window(nullptr), board(nullptr), turn(BLACK), ai_en
 				SDL_Quit();
 			}
 
-			running = true;
-
+			
 			// game objects creation
 
 			board = new Board("assets/images/chess-board.bmp");
@@ -88,8 +89,15 @@ Game::Game():running(false), window(nullptr), board(nullptr), turn(BLACK), ai_en
 
 				}
 			}
+
+			// setting startup properties
+
+			running = true;
+			//Game::turn = PLAYER;
 		}
 	}
+
+	
 }
 
 
@@ -114,6 +122,7 @@ void Game::update()
 {
 	SDL_Event event;
 	int xMousePos{0}, yMousePos{0};
+	
 
 	while (SDL_PollEvent(&event))
 	{
@@ -130,11 +139,24 @@ void Game::update()
 				SDL_GetMouseState(&xMousePos, &yMousePos);
 				break;
 			}
-
+		
 		}
 	}
 
+	/*
 	
+	// changing turn for players, it should be executed when one player has made his move
+
+	if (Game::turn == PLAYER)
+	{
+		Game::turn = OPPONENT;
+	}
+	else
+	{
+		Game::turn = PLAYER;
+	}
+
+	*/
 
 }
 
@@ -159,7 +181,5 @@ Game::~Game()
 	window = nullptr;
 	renderer = nullptr;
 	board = nullptr;
-
-
 }
 

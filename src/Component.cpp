@@ -19,7 +19,7 @@ Component::~Component()
 
 // implementation for board
 
-Board::Board(const char* img) : Component(img)
+Board::GameObj(const char* img) : Component(img)
 {
 
 }
@@ -32,7 +32,7 @@ void Board::DrawTexture()
 	
 }
 
-Board::~Board()
+Board::~GameObj()
 {
 	
 }
@@ -40,7 +40,7 @@ Board::~Board()
 
 // implementation for pawn
 
-Pawn::Pawn(const char* image) : Component(image), xBlock(0), yBlock(0),
+Pawn::GameObj(const char* image) : Component(image), xBlock(0), yBlock(0),
 								type(pawnType::NIL), col(NIL)
 {
 	src.h = 120;
@@ -132,18 +132,13 @@ void Pawn::DrawTexture()
 }
 
 
-
-/*  implemet the move operation
-
-void Pawn::move(SDL_Event& e)
+bool Pawn::hasClicked()				// to implement
 {
-	case pawnType::BLACK_PAWN:
+	return false;
 }
 
-*/
 
-
-Pawn::~Pawn()
+Pawn::~GameObj()
 {
 	
 }

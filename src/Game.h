@@ -16,6 +16,8 @@ public:
 	void update();
 	void renderGame();
 
+	static int turn;
+
 
 private:
 	bool running;
@@ -26,9 +28,7 @@ private:
 
 	// character array 
 	Pawn* pieces[32];
-
-	// keep turn info
-	int turn;
+	
 
 	// to see if opponent is computer
 	bool ai_enabled;

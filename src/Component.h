@@ -23,44 +23,27 @@ public:
 
 
 
-
-class Board : public Component
+template <bool T> class GameObj
 {
-
-public:
-
-	// constructors
-	Board();
-	explicit Board(const char*);
-	Board(const Board&);
-	Board(Board&&);
-	Board& operator=(const Board&);
-	~Board();
-
-	// methods
-	void DrawTexture();
-
-	
 
 };
 
-
-class Pawn : public Component
+template<> class GameObj<true> : public Component
 {
-
 public:
 
-	Pawn();
-	explicit Pawn(const char* );
-	Pawn(const Pawn&);
-	Pawn(Pawn&&);
-	Pawn& operator=(Pawn&);
-	~Pawn();
+	GameObj();
+	explicit GameObj(const char*);
+	GameObj(const GameObj&);
+	GameObj(GameObj&&);
+	GameObj& operator=(GameObj&);
+	~GameObj();
 
 	// methods
 	void DrawTexture();
 	void update();
-	//void move(SDL_Event& e);
+	bool hasClicked();
+	
 
 	// stores piece type and color info
 	pawnType type;
@@ -72,3 +55,26 @@ public:
 	// stores the src and dest for textures
 	SDL_Rect src, dest;
 };
+
+
+template<> class GameObj<false> : public Component
+{
+public:
+
+	// constructors
+	GameObj();
+	explicit GameObj(const char*);
+	GameObj(const GameObj&);
+	GameObj(GameObj&&);
+	GameObj& operator=(const GameObj&);
+	~GameObj();
+
+	// methods
+	void DrawTexture();
+
+};
+
+
+
+using Pawn = GameObj<true>;
+using Board = GameObj<false>;
