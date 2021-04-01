@@ -41,7 +41,7 @@ Board::~GameObj()
 // implementation for pawn
 
 Pawn::GameObj(const char* image) : Component(image), xBlock(0), yBlock(0),
-								type(pawnType::NIL), col(NIL)
+								type(pawnType::NIL), col(NIL), clicked(false)
 {
 	src.h = 120;
 	src.w = 80;
@@ -132,9 +132,9 @@ void Pawn::DrawTexture()
 }
 
 
-bool Pawn::hasClicked()				// to implement
+void Pawn::onClicked()				// to implement, this method will make the pawn move
 {
-	return false;
+	
 }
 
 

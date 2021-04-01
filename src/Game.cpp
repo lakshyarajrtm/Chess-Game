@@ -8,7 +8,7 @@
 #define OPPONENT 1
 
 SDL_Renderer* renderer;
-
+int xMousePos = 0, yMousePos = 0;
 
 pawnType layout[8][8] = {
 
@@ -75,7 +75,6 @@ Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 						(pieces[pieceIdx])->dest.y = (i * 80) + 10;
 						(pieces[pieceIdx])->xBlock = j;
 						(pieces[pieceIdx])->yBlock = i;
-						
 						(pieces[pieceIdx])->type = num;
 						(pieces[pieceIdx])->col = BLACK;
 						
@@ -93,6 +92,7 @@ Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 			// setting startup properties
 
 			running = true;
+			
 			//Game::turn = PLAYER;
 		}
 	}
@@ -118,10 +118,15 @@ void Game::renderGame()
 
 }
 
+
+
+
 void Game::update()
 {
 	SDL_Event event;
-	int xMousePos{0}, yMousePos{0};
+	bool userEvent = false;
+	
+
 	
 
 	while (SDL_PollEvent(&event))
@@ -137,11 +142,53 @@ void Game::update()
 			case SDL_MOUSEBUTTONDOWN:
 			{
 				SDL_GetMouseState(&xMousePos, &yMousePos);
+				userEvent = true;
 				break;
 			}
 		
 		}
 	}
+
+
+	if (userEvent) 
+	{
+		int xBlockClicked = xMousePos / 100;
+		int yBlockClicked = yMousePos / 80;
+
+		std::cout << xBlockClicked << "," << yBlockClicked << std::endl;
+		std::cout << userEvent << std::endl;
+
+
+		for (int i = 0; i < PIECE_COUNT; i++)
+		{
+			if (pieces[i]->clicked)
+			{
+				pieces[i]->xBlock = xBlockClicked;
+				pieces[i]->yBlock = yBlockClicked;
+				pieces[i]->dest.x = pieces[i]->xBlock * 100;
+				pieces[i]->dest.y = pieces[i]->yBlock * 80;
+				pieces[i]->clicked = false;
+				return;
+			}
+		}
+
+
+		for (int i = 0; i < PIECE_COUNT; i++)
+		{
+			if (pieces[i]->xBlock == xBlockClicked && pieces[i]->yBlock == yBlockClicked)
+			{
+				pieces[i]->clicked = true;
+				return;
+
+			}
+		}
+
+	}
+	
+
+	
+
+
 
 	/*
 	

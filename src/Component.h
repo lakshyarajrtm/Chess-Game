@@ -42,7 +42,7 @@ public:
 	// methods
 	void DrawTexture();
 	void update();
-	bool hasClicked();
+	void onClicked();
 	
 
 	// stores piece type and color info
@@ -52,6 +52,7 @@ public:
 	// store the block postion of a piece
 	int xBlock, yBlock;
 
+	bool clicked;
 	// stores the src and dest for textures
 	SDL_Rect src, dest;
 };
