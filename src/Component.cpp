@@ -1,8 +1,9 @@
+#pragma once
+
 #include "Component.h"
-#include <fstream>
 
 
-Component::Component(const char* image)
+Component::Component(const char* image) noexcept
 {
 	surf = SDL_LoadBMP(image);
 	tex = SDL_CreateTextureFromSurface(renderer, surf);
@@ -14,22 +15,19 @@ Component::~Component()
 {
 	SDL_FreeSurface(surf);
 	tex = nullptr;
-	
 }
 
 // implementation for board
 
-Board::GameObj(const char* img) : Component(img)
+Board::GameObj(const char* img) noexcept : Component(img)
 {
 
 }
 
 void Board::DrawTexture() 
 {
-	
 	SDL_SetRenderTarget(renderer, tex);
 	SDL_RenderCopy(renderer, tex, NULL, NULL);
-	
 }
 
 Board::~GameObj()
@@ -40,7 +38,7 @@ Board::~GameObj()
 
 // implementation for pawn
 
-Pawn::GameObj(const char* image) : Component(image), xBlock(0), yBlock(0),
+Pawn::GameObj(const char* image) noexcept: Component(image), xBlock(0), yBlock(0),
 								type(pawnType::NIL), col(NIL), clicked(false)
 {
 	src.h = 120;
@@ -127,11 +125,23 @@ void Pawn::DrawTexture()
 	}
 	
 	SDL_SetRenderTarget(renderer, tex);
-	SDL_RenderCopy(renderer, tex, &src, &dest);
-	
+	SDL_RenderCopy(renderer, tex, &src, &dest);	
 }
 
+// move constructor
 
+/*Pawn::GameObj(GameObj&& obj) noexcept : clicked(std::move(obj.clicked)), col(std::move(obj.col)),
+							xBlock(std::move(obj.xBlock)), yBlock(std::move(obj.yBlock))
+{
+	tex = std::move(obj.tex);
+	src.h = std::move(obj.src.h);
+	src.w = std::move(obj.src.h);
+	src.x = std::move(obj.src.h);
+	src.y = std::move(obj.src.y);
+
+	obj.tex = nullptr;
+}
+*/
 void Pawn::onClicked()				// to implement, this method will make the pawn move
 {
 	

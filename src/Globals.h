@@ -15,6 +15,6 @@ enum color
 
 
 extern SDL_Renderer* renderer;
-extern pawnType layout[8][8];
+
 
 

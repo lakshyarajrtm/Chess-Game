@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Game.h"
 #include <chrono>
 #include <ctime>
 
+#include "Game.h"
 
 
 int main(int argc, char* args[])
 {
 	
 	Game* game = new Game();
-	Uint32 FPS = 200;
+	const Uint32 FPS = 200;
 
 	while (game->isRunning())
 	{
@@ -31,9 +31,7 @@ int main(int argc, char* args[])
 		}
 
 	}
-
 	delete game;
-	
 	return 0;
 }
 

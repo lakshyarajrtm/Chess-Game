@@ -1,8 +1,8 @@
 #pragma once
 
 #include <SDL/SDL.h>
-#include "Globals.h"
 #include <iostream>
+#include "Globals.h"
 
 
 
@@ -12,7 +12,7 @@ class Component
 public:
 	// constructors
 	Component();
-	explicit Component(const char*);
+	explicit Component(const char*) noexcept;
 	virtual ~Component();
 	
 
@@ -31,12 +31,13 @@ template <bool T> class GameObj
 template<> class GameObj<true> : public Component
 {
 public:
-
+	// constructors
 	GameObj();
-	explicit GameObj(const char*);
-	GameObj(const GameObj&);
-	GameObj(GameObj&&);
-	GameObj& operator=(GameObj&);
+	explicit GameObj(const char*) noexcept;
+
+	GameObj(const GameObj&) noexcept;
+
+	GameObj(GameObj&&) noexcept;
 	~GameObj();
 
 	// methods
@@ -64,10 +65,7 @@ public:
 
 	// constructors
 	GameObj();
-	explicit GameObj(const char*);
-	GameObj(const GameObj&);
-	GameObj(GameObj&&);
-	GameObj& operator=(const GameObj&);
+	explicit GameObj(const char*) noexcept;
 	~GameObj();
 
 	// methods
@@ -75,7 +73,6 @@ public:
 
 };
 
-
-
 using Pawn = GameObj<true>;
 using Board = GameObj<false>;
+

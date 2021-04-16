@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Game.h"
-#include "Globals.h"
 #include "Component.h"
+#include "Globals.h"
+#include "Game.h"
+
 #define PIECE_COUNT (int)32
 #define PLAYER 0
 #define OPPONENT 1
@@ -23,14 +24,13 @@ pawnType layout[8][8] = {
 };
 
 
-Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
+Game::Game() : running(false), window(nullptr), board(nullptr), ai_enabled(false)
 {
-	
+
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0)
 	{
 		std::cout << "Unable to initialize SDL Error:" << SDL_GetError();
-		
 
 	}
 	else
@@ -53,13 +53,15 @@ Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 				SDL_Quit();
 			}
 
-			
+
 			// game objects creation
 
 			board = new Board("assets/images/chess-board.bmp");
+			pieces.reserve(PIECE_COUNT);
 			for (int i = 0; i < PIECE_COUNT; i++)
 			{
-				pieces[i] = new Pawn("assets/images/chess-pieces.bmp");
+
+				pieces.push_back(new Pawn("assets/images/chess-pieces.bmp"));
 			}
 
 			int pieceIdx = 0;
@@ -77,12 +79,12 @@ Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 						(pieces[pieceIdx])->yBlock = i;
 						(pieces[pieceIdx])->type = num;
 						(pieces[pieceIdx])->col = BLACK;
-						
+
 						if (pieceIdx > 15)
 						{
 							(pieces[pieceIdx])->col = WHITE;
 						}
-						
+
 						pieceIdx++;
 					}
 
@@ -92,30 +94,28 @@ Game::Game():running(false), window(nullptr), board(nullptr), ai_enabled(false)
 			// setting startup properties
 
 			running = true;
-			
+
 			//Game::turn = PLAYER;
 		}
 	}
 
-	
+
 }
 
 
 void Game::renderGame()
 {
 	SDL_RenderClear(renderer);
-	
+
 
 	board->DrawTexture();
-	
+
 	for (int i = 0; i < PIECE_COUNT; i++)
 	{
 		(pieces[i])->DrawTexture();
 	}
-	
+
 	SDL_RenderPresent(renderer);
-
-
 }
 
 
@@ -125,32 +125,30 @@ void Game::update()
 {
 	SDL_Event event;
 	bool userEvent = false;
-	
 
-	
 
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{
-			case SDL_QUIT:
-			{
-				running = false;
-				break;
-			}
+		case SDL_QUIT:
+		{
+			running = false;
+			break;
+		}
 
-			case SDL_MOUSEBUTTONDOWN:
-			{
-				SDL_GetMouseState(&xMousePos, &yMousePos);
-				userEvent = true;
-				break;
-			}
-		
+		case SDL_MOUSEBUTTONDOWN:
+		{
+			SDL_GetMouseState(&xMousePos, &yMousePos);
+			userEvent = true;
+			break;
+		}
+
 		}
 	}
 
 
-	if (userEvent) 
+	if (userEvent)
 	{
 		int xBlockClicked = xMousePos / 100;
 		int yBlockClicked = yMousePos / 80;
@@ -167,6 +165,7 @@ void Game::update()
 				pieces[i]->yBlock = yBlockClicked;
 				pieces[i]->dest.x = pieces[i]->xBlock * 100;
 				pieces[i]->dest.y = pieces[i]->yBlock * 80;
+
 				pieces[i]->clicked = false;
 				return;
 			}
@@ -184,16 +183,10 @@ void Game::update()
 		}
 
 	}
-	
-
-	
-
-
 
 	/*
-	
-	// changing turn for players, it should be executed when one player has made his move
 
+	// changing turn for players, it should be executed when one player has made his move
 	if (Game::turn == PLAYER)
 	{
 		Game::turn = OPPONENT;
@@ -202,7 +195,6 @@ void Game::update()
 	{
 		Game::turn = PLAYER;
 	}
-
 	*/
 
 }
@@ -229,4 +221,3 @@ Game::~Game()
 	renderer = nullptr;
 	board = nullptr;
 }
-

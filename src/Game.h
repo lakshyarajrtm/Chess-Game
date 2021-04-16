@@ -1,9 +1,10 @@
 #pragma once
 
-#include <SDL/SDL.h>
 #include <iostream>
-#include "Component.h"
+#include <SDL/SDL.h>
+#include <vector>
 
+#include "Component.h"
 
 
 class Game
@@ -27,7 +28,7 @@ private:
 	Board* board;
 
 	// character array 
-	Pawn* pieces[32];
+	std::vector<Pawn*> pieces;
 	
 
 	// to see if opponent is computer
